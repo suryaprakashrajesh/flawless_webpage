@@ -1,7 +1,7 @@
 [
   {
     "category": "reception",
-    "image": "images/reception/30 x 20 E-2 copy 2-web.webp",
+    "image": "images/reception/30x20-E2-copy2-web.webp",
     "title": "Grand Reception Hall",
     "alt": "Elegantly decorated wedding reception hall with ambient lighting",
     "featured": true
@@ -44,7 +44,7 @@
   },
   {
     "category": "reception",
-    "image": "images/reception/DSC07273 copy-2.jpg.webp",
+    "image": "images/reception/DSC07273-copy2.jpg.webp",
     "title": "Reception Atmosphere",
     "alt": "Warm and inviting atmosphere at the wedding reception venue"
   },
@@ -117,7 +117,7 @@
   },
   {
     "category": "wedding",
-    "image": "images/wedding/img_4991.jpg.webp",
+    "image": "images/wedding/IMG_4991.JPG.webp",
     "title": "Wedding Love",
     "alt": "Couple embracing during their wedding day"
   },
@@ -142,7 +142,7 @@
   },
   {
     "category": "engagement",
-    "image": "images/engagement/09 sparkle.jpg.webp",
+    "image": "images/engagement/09-sparkle.jpg.webp",
     "title": "Engagement Sparkle",
     "alt": "Sparkling engagement ring close-up during couple photoshoot"
   },
@@ -154,7 +154,7 @@
   },
   {
     "category": "engagement",
-    "image": "images/engagement/31 glossy pearl.jpg.webp",
+    "image": "images/engagement/31-glossy-pearl.jpg.webp",
     "title": "Engagement Elegance",
     "alt": "Elegant engagement portrait with pearl-toned backdrop"
   },
@@ -221,7 +221,7 @@
   },
   {
     "category": "outdoor",
-    "image": "images/outdoor/DSC05695.JPG.webp",
+    "image": "images/outdoor/DSC05695.jpg.webp",
     "title": "Outdoor Charm",
     "alt": "Charming outdoor portrait with depth-of-field bokeh effect"
   },
@@ -245,7 +245,7 @@
   },
   {
     "category": "birthday",
-    "image": "images/birthday/pad Fully Acrylic copy.jpg.webp",
+    "image": "images/birthday/Pad-Fully-Acrylic-copy.jpg.webp",
     "title": "Birthday Celebration",
     "alt": "Beautifully decorated birthday party with acrylic display",
     "featured": true
@@ -288,13 +288,13 @@
   },
   {
     "category": "birthday",
-    "image": "images/birthday/image copy.webp",
+    "image": "images/birthday/image-copy.webp",
     "title": "Birthday Party",
     "alt": "Professional birthday party photography coverage"
   },
   {
     "category": "birthday",
-    "image": "images/birthday/12 x 15.jpg.webp",
+    "image": "images/birthday/12x15.jpg.webp",
     "title": "Birthday Album",
     "alt": "Birthday event album-quality professional photograph"
   },
@@ -325,13 +325,13 @@
   },
   {
     "category": "maternity",
-    "image": "images/maternity/04.jpg copy.jpg.webp",
+    "image": "images/maternity/04.jpg-copy.jpg.webp",
     "title": "Maternity Love",
     "alt": "Loving maternity session with natural expressions"
   },
   {
     "category": "maternity",
-    "image": "images/maternity/Front Cover.jpg.webp",
+    "image": "images/maternity/Front-Cover.jpg.webp",
     "title": "Maternity Cover",
     "alt": "Magazine-style maternity cover portrait"
   },
