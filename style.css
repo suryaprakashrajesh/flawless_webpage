@@ -1124,7 +1124,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; colo
 .review-text {
   font-size: 1rem;
   font-style: italic;
-  color: #888888;
+  color: rgba(255, 255, 255, 0.7); /* Improved contrast ratio (> 4.5:1) */
   line-height: 1.75;
   margin-bottom: 2rem;
 }
@@ -1143,7 +1143,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; colo
 }
 
 .client-info h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.15rem; color: #FFFFFF; }
-.client-info span { font-size: 0.8rem; color: #888888; }
+.client-info span { font-size: 0.8rem; color: #A0A0A0; /* Improved contrast ratio to ~6.4:1 */ }
 
 /* =========================================================================
    INSTAGRAM
@@ -1672,12 +1672,16 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; colo
     gap: 0;
     padding: 2rem;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    transition: clip-path 0.4s var(--ease);
+    visibility: hidden; /* Prevent screen reader and tab focus access when closed */
+    pointer-events: none;
+    transition: clip-path 0.4s var(--ease), visibility 0.4s var(--ease);
     z-index: 999;
   }
 
   .nav-links.active {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .nav-links a {

@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================
        0. DYNAMIC GALLERY LOADING (from JSON)
        ========================================== */
-        let galleryData = [];
+    let galleryData = [];
     let galleryItems = []; // Will be re-queried after loading
     let activeFilter = 'all';
     let visibleCount = 6;
@@ -58,7 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('gallery-data.json');
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             galleryData = await response.json();
-            renderGallery();
+            renderGallery(true);
+            
+            // Initialize lightbox event delegation once
+            initGalleryClickDelegation();
         } catch (error) {
             console.error('Failed to load gallery data:', error);
             // Fallback: show error message
@@ -73,11 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function renderGallery() {
+    function renderGallery(reset = false) {
         const galleryGrid = document.getElementById('gallery-grid');
         if (!galleryGrid) return;
 
-        galleryGrid.innerHTML = '';
+        if (reset) {
+            galleryGrid.innerHTML = '';
+            visibleCount = 6;
+        }
 
         // Filter the galleryData based on the active filter
         let filteredData = galleryData;
@@ -85,8 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredData = galleryData.filter(item => item.category === activeFilter);
         }
 
-        // Slice to the currently visible count
-        const itemsToRender = filteredData.slice(0, visibleCount);
+        // Get currently rendered count to only append new items
+        const renderedItems = galleryGrid.querySelectorAll('.gallery-item');
+        const start = reset ? 0 : renderedItems.length;
+        const end = Math.min(filteredData.length, visibleCount);
+        const itemsToRender = filteredData.slice(start, end);
 
         itemsToRender.forEach(item => {
             const extraClass = item.featured ? ' featured' : '';
@@ -96,12 +105,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const categoryLabel = CATEGORY_LABELS[item.category] || 'Other';
             const altText = item.alt || item.title;
 
+            // Generate responsive file paths (.webp)
+            const imgBase = item.image.substring(0, item.image.lastIndexOf('.'));
+            const ext = item.image.substring(item.image.lastIndexOf('.'));
+            const img400 = `${imgBase}-400w${ext}`;
+            const img800 = `${imgBase}-800w${ext}`;
+
             const div = document.createElement('div');
             div.className = `gallery-item loading ${item.category}${extraClass}`;
             div.setAttribute('data-category', item.category);
+            div.setAttribute('data-full-src', item.image); // Save original high-res image for lightbox
             div.innerHTML = `
                 <div class="gallery-img-wrapper loading-shimmer">
-                    <img src="${item.image}" alt="${altText}" loading="lazy" decoding="async" fetchpriority="low">
+                    <img 
+                      src="${img400}" 
+                      srcset="${img400} 400w, ${img800} 800w, ${item.image} 1200w" 
+                      sizes="(max-width: 576px) 90vw, (max-width: 992px) 45vw, 380px"
+                      alt="${altText}" 
+                      loading="lazy" 
+                      decoding="async" 
+                      fetchpriority="low">
                     <div class="gallery-overlay">${featuredBadge}
                         <h3>${item.title}</h3>
                         <span class="category-tag">${categoryLabel}</span>
@@ -159,9 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
             item.style.opacity = '1';
             item.style.transform = 'scale(1)';
         });
-
-        // Initialize lightbox event delegation
-        initGalleryClickDelegation();
     }
 
     fetchGalleryData();
@@ -344,16 +364,19 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.setAttribute('aria-pressed', 'true');
 
             activeFilter = btn.getAttribute('data-filter');
-            visibleCount = 6; // Reset visible count on category change
-            renderGallery();
+            renderGallery(true);
         });
     });
 
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            visibleCount = Infinity; // Load the rest of the images
-            renderGallery();
+            let filteredData = galleryData;
+            if (activeFilter !== 'all') {
+                filteredData = galleryData.filter(item => item.category === activeFilter);
+            }
+            visibleCount = Math.min(filteredData.length, visibleCount + 6);
+            renderGallery(false);
         });
     }
 
@@ -397,21 +420,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    let triggerElement = null;
+
     function openLightbox(item) {
+        triggerElement = document.activeElement; // Remember what had focus
+        const fullSrc = item.getAttribute('data-full-src');
         const img = item.querySelector('img');
         const title = item.querySelector('h3');
 
-        lightboxImg.src = img.src;
+        lightboxImg.src = fullSrc || img.src;
         lightboxImg.alt = img.alt || '';
         lightboxCaption.innerText = title ? title.innerText : '';
         updateCounter();
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // Programmatically focus on close button for keyboard accessibility
+        if (closeBtn) {
+            closeBtn.focus();
+        }
     }
 
     function closeLightbox() {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
+        if (triggerElement) {
+            triggerElement.focus(); // Restore focus to the trigger button
+        }
     }
 
     function updateCounter() {

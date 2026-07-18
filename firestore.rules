@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Only allow writes to the 'inquiries' collection. No reads allowed from the frontend.
+    match /inquiries/{document} {
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'phone', 'service', 'message', 'timestamp'])
+                    && request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.email is string
+                    && request.resource.data.email.matches('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')
+                    && request.resource.data.phone is string
+                    && request.resource.data.phone.size() >= 10
+                    && request.resource.data.service is string
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() > 0
+                    && request.resource.data.timestamp is timestamp;
+      allow read, update, delete: if false;
+    }
+    
+    // Default fallback: deny all read/write operations on other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
