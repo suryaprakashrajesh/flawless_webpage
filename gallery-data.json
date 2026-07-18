@@ -356,13 +356,13 @@
   },
   {
     "category": "profile",
-    "image": "images/profile/image copy 2.webp",
+    "image": "images/profile/image-copy-2.webp",
     "title": "Corporate Portrait",
     "alt": "Corporate profile portrait with clean background"
   },
   {
     "category": "profile",
-    "image": "images/profile/image copy 3.webp",
+    "image": "images/profile/image-copy-3.webp",
     "title": "Business Headshot",
     "alt": "Professional business headshot for corporate use"
   },
@@ -374,13 +374,13 @@
   },
   {
     "category": "profile",
-    "image": "images/profile/image copy 5.webp",
+    "image": "images/profile/image-copy-5.webp",
     "title": "Creative Portrait",
     "alt": "Creative portrait photography with dramatic lighting"
   },
   {
     "category": "profile",
-    "image": "images/profile/image copy.webp",
+    "image": "images/profile/image-copy.webp",
     "title": "Personal Portrait",
     "alt": "Personal portrait with natural and relaxed expression"
   },
@@ -404,7 +404,7 @@
   },
   {
     "category": "profile",
-    "image": "images/profile/image copy 4.webp",
+    "image": "images/profile/image-copy-4.webp",
     "title": "Profile Shot",
     "alt": "Professional profile photograph with expert lighting"
   }
