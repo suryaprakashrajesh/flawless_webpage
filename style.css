@@ -253,17 +253,6 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; colo
   box-shadow: 0 8px 30px rgba(225,29,46,0.35);
 }
 
-.btn-outline {
-  border: 1.5px solid var(--border-color);
-  color: var(--text-main);
-  background: transparent;
-}
-
-.btn-outline:hover {
-  border-color: #E11D2E;
-  color: #E11D2E;
-  transform: translateY(-2px);
-}
 
 .btn-full { width: 100%; }
 
@@ -735,9 +724,32 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; colo
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 2.5rem;
-  padding: 0.5rem;
+  padding: 1.25rem 0.5rem;
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 60%,
+    transparent 100%
+     );
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 60%,
+    transparent 100%
+  );
 }
-
+.gallery-filters .filter-btn {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+}
 .filter-btn {
   padding: 0.5rem 1.25rem;
   border-radius: 30px;
@@ -1727,7 +1739,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; colo
 @media (max-width: 576px) {
   .section { padding: 70px 0; }
   .gallery-grid { columns: 1; }
-  .gallery-filters { gap: 0.3rem; padding: 0.4rem; }
+  .gallery-filters { gap: 0.3rem; padding: 0.8rem 0.4rem; }
   .filter-btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
   .stats-grid { grid-template-columns: 1fr; }
   .contact-form-wrapper { padding: 1.75rem 1.25rem; }
