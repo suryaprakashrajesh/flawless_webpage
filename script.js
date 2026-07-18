@@ -105,12 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const categoryLabel = CATEGORY_LABELS[item.category] || 'Other';
             const altText = item.alt || item.title;
 
-            // Generate responsive file paths (.webp)
-            const imgBase = item.image.substring(0, item.image.lastIndexOf('.'));
-            const ext = item.image.substring(item.image.lastIndexOf('.'));
-            const img400 = `${imgBase}-400w${ext}`;
-            const img800 = `${imgBase}-800w${ext}`;
-
             const div = document.createElement('div');
             div.className = `gallery-item loading ${item.category}${extraClass}`;
             div.setAttribute('data-category', item.category);
@@ -118,9 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             div.innerHTML = `
                 <div class="gallery-img-wrapper loading-shimmer">
                     <img 
-                      src="${img400}" 
-                      srcset="${img400} 400w, ${img800} 800w, ${item.image} 1200w" 
-                      sizes="(max-width: 576px) 90vw, (max-width: 992px) 45vw, 380px"
+                      src="${item.image}" 
                       alt="${altText}" 
                       loading="lazy" 
                       decoding="async" 
